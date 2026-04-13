@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arts Appreciation — Comprehensive Reviewer</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0c0a;
+    --surface: #181410;
+    --card: #1f1b17;
+    --border: #2e2820;
+    --gold: #c9a84c;
+    --gold-light: #e8c87a;
+    --cream: #f0e8d8;
+    --muted: #7a6e62;
+    --accent-red: #c45c3a;
+    --accent-teal: #3a8c8c;
+    --text: #e8dcc8;
+    --text-dim: #9a8e82;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* HEADER */
+  header {
+    position: relative;
+    padding: 80px 60px 60px;
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -120px; right: -120px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 6vw, 72px);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--cream);
+    margin-bottom: 20px;
+  }
+  header h1 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+  .header-sub {
+    font-size: 14px;
+    color: var(--muted);
+    max-width: 500px;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(14,12,10,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  nav::-webkit-scrollbar { display: none; }
+  nav a {
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+    padding: 16px 18px;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+  }
+  nav a:hover { color: var(--gold); border-bottom-color: var(--gold); }
+
+  /* LAYOUT */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  /* SECTION */
+  section {
+    padding: 70px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  .section-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 11px;
+    color: var(--border);
+    margin-right: 10px;
+  }
+  section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(26px, 4vw, 44px);
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 40px;
+    line-height: 1.2;
+  }
+  section h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--gold-light);
+    margin: 32px 0 12px;
+  }
+  section h4 {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent-teal);
+    margin: 24px 0 8px;
+  }
+  p { color: var(--text-dim); margin-bottom: 12px; }
+  strong { color: var(--text); font-weight: 500; }
+
+  /* CARDS GRID */
+  .grid { display: grid; gap: 16px; }
+  .grid-2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .grid-3 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 24px;
+    position: relative;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: var(--gold); }
+  .card-icon {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+  .card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--cream);
+    text-transform: none;
+    letter-spacing: 0;
+    margin: 0 0 8px;
+  }
+  .card p { font-size: 13px; margin: 0; }
+
+  /* HIGHLIGHT BOX */
+  .highlight {
+    background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(201,168,76,0.03));
+    border-left: 3px solid var(--gold);
+    border-radius: 0 4px 4px 0;
+    padding: 20px 24px;
+    margin: 20px 0;
+  }
+  .highlight p { margin: 0; color: var(--text); font-size: 14px; }
+
+  /* TIMELINE */
+  .timeline { position: relative; padding-left: 28px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 6px; top: 8px; bottom: 8px;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--gold), var(--border));
+  }
+  .tl-item {
+    position: relative;
+    padding: 0 0 28px 20px;
+  }
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -22px; top: 8px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: 2px solid var(--bg);
+  }
+  .tl-period {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .tl-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    color: var(--cream);
+    margin-bottom: 6px;
+  }
+  .tl-desc { font-size: 13px; color: var(--text-dim); }
+
+  /* TABLE */
+  .styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 13px;
+  }
+  .styled-table th {
+    background: var(--card);
+    color: var(--gold);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--gold);
+  }
+  .styled-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-dim);
+    vertical-align: top;
+  }
+  .styled-table tr:hover td { background: var(--card); }
+
+  /* TAGS */
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 2px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+  }
+  .tag.gold { border-color: var(--gold); color: var(--gold-light); }
+  .tag.teal { border-color: var(--accent-teal); color: var(--accent-teal); }
+  .tag.red { border-color: var(--accent-red); color: var(--accent-red); }
+
+  /* QUIZ BOX */
+  .quiz-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 24px;
+    margin: 16px 0;
+  }
+  .quiz-q {
+    font-size: 14px;
+    color: var(--text);
+    margin-bottom: 10px;
+    font-weight: 400;
+  }
+  .quiz-opts { list-style: none; }
+  .quiz-opts li {
+    font-size: 13px;
+    color: var(--text-dim);
+    padding: 4px 0 4px 20px;
+    position: relative;
+  }
+  .quiz-opts li::before {
+    content: attr(data-opt);
+    position: absolute;
+    left: 0;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+  }
+  .quiz-opts li.answer { color: var(--gold-light); }
+  .quiz-opts li.answer::after {
+    content: ' ✓';
+    color: var(--gold);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+  }
+
+  /* ANSWER KEY */
+  .answer-key {
+    background: rgba(201,168,76,0.06);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 4px;
+    padding: 20px 24px;
+    margin-top: 24px;
+  }
+  .answer-key h4 {
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .answer-key-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 6px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+
+  /* LIST STYLES */
+  ul.styled, ol.styled {
+    padding-left: 20px;
+    color: var(--text-dim);
+    font-size: 14px;
+  }
+  ul.styled li, ol.styled li { margin-bottom: 6px; }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: linear-gradient(to right, var(--gold), transparent);
+    margin: 28px 0;
+    opacity: 0.4;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 40px 60px;
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 2px;
+  }
+
+  @media (max-width: 600px) {
+    header { padding: 50px 24px 40px; }
+    .container { padding: 0 20px; }
+    nav { padding: 0 16px; }
+    section { padding: 50px 0; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-tag">GE 218 — Comprehensive Reviewer</div>
+  <h1>Arts<br><em>Appreciation</em></h1>
+  <p class="header-sub">A complete study guide covering all modules: subject & content, art movements, literary arts, theatrical arts, music, dance, architecture, and more.</p>
+</header>
+
+<nav>
+  <a href="#module1">Intro to Art</a>
+  <a href="#module2">Subject & Content</a>
+  <a href="#forms">Forms of Visual Art</a>
+  <a href="#artists">Artists & Artisans</a>
+  <a href="#movements">Art Movements</a>
+  <a href="#literary">Literary Arts</a>
+  <a href="#theater">Theater Arts</a>
+  <a href="#music">Music</a>
+  <a href="#dance">Dance</a>
+  <a href="#architecture">Architecture</a>
+  <a href="#planes">Planes & Perspective</a>
+</nav>
+
+<!-- ============================================================ -->
+<section id="module1">
+<div class="container">
+  <div class="section-label"><span class="section-num">01</span>Introduction to Art</div>
+  <h2>What is Art & Its Significance</h2>
+
+  <div class="highlight">
+    <p>Art has no simple definition. At its core, art represents <strong>human expression made visible, audible, or tangible</strong> through creative processes. Philosopher Arthur Danto argued that art involves both an object and the theoretical framework that gives it meaning — art exists within interpretive contexts, not as isolated objects.</p>
+  </div>
+
+  <h3>General Classification of the Arts</h3>
+  <div class="grid grid-3">
+    <div class="card">
+      <div class="card-icon">🖼️</div>
+      <h4>Visual Arts</h4>
+      <p>Painting, sculpture, photography, digital art — experienced primarily through sight.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📖</div>
+      <h4>Literary Arts</h4>
+      <p>Poetry, fiction, drama — engage the imagination through written or spoken language and storytelling.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🎭</div>
+      <h4>Performing Arts</h4>
+      <p>Music, dance, theater — meaning created through live or recorded performance over time.</p>
+    </div>
+  </div>
+
+  <h3>Significance of Art</h3>
+  <div class="grid grid-2">
+    <div class="card">
+      <h4>To Individuals</h4>
+      <p><strong>Self-expression</strong> — articulates thoughts and feelings that might otherwise remain unexpressed. A person struggling with grief may find solace in music; joy might be expressed through dance or visual creation.</p>
+    </div>
+    <div class="card">
+      <h4>To Society</h4>
+      <p><strong>Cultural Identity</strong> — indigenous art, traditional music, regional architecture all contribute to distinctive cultural identities across generations.</p>
+    </div>
+    <div class="card">
+      <h4>Social Connection</h4>
+      <p>Concerts, museums, theater, and online communities demonstrate how shared artistic experiences bring people together, building unity.</p>
+    </div>
+    <div class="card">
+      <h4>Historical Record</h4>
+      <p>Art preserves information about past societies. Cave paintings reveal prehistoric life; medieval manuscripts show social hierarchies; street art documents current movements.</p>
+    </div>
+  </div>
+
+  <h3>Art in Everyday Life</h3>
+  <ul class="styled">
+    <li>Music enhances daily activities like commuting, working, and relaxing</li>
+    <li>Fashion reflects creativity, culture, and personal identity</li>
+    <li>Social media features visual arts through photos, videos, and design</li>
+    <li>Films and advertisements combine arts to entertain and influence society</li>
+  </ul>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<section id="module2">
+<div class="container">
+  <div class="section-label"><span class="section-num">02</span>Module 2, Lesson 1</div>
+  <h2>Subject & Content of Art</h2>
+
+  <h3>Basic Components of a Work of Art</h3>
+  <div class="grid grid-3">
+    <div class="card">
+      <div class="card-icon">👁️</div>
+      <h4>Subject</h4>
+      <p>The visual focus or image extracted from examining the artwork — the <strong>"What"</strong>.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">💬</div>
+      <h4>Content</h4>
+      <p>The meaning communicated by the artist or the artwork — the <strong>"Why"</strong>.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔧</div>
+      <h4>Form</h4>
+      <p>The development and configuration of the artwork; how elements and medium are put together — the <strong>"How"</strong>.</p>
+    </div>
+  </div>
+
+  <h3>Types of Subject</h3>
+  <div class="grid grid-2">
+    <div class="card">
+      <h4>1. Representational / Objective Art</h4>
+      <p>Represents objects or events in the real world. Easily recognizable, derived from real object sources with strong visual reference to reality.</p>
+      <div class="divider"></div>
+      <p style="font-size:13px;"><strong>Subcategories:</strong></p>
+      <ul class="styled" style="font-size:13px;">
+        <li><strong>Still Life</strong> — e.g., Sunflowers (Van Gogh); Jug, Curtain and Fruit Bowl (Cézanne)</li>
+        <li><strong>Portrait</strong> — e.g., Girl with a Pearl Earring (Vermeer); Mona Lisa (da Vinci)</li>
+        <li><strong>Landscape</strong> — e.g., Water Lilies (Monet); The Hay Wain (Constable)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>2. Non-Representational Art</h4>
+      <p>Does not make reference to the real world — no person, place, thing, or event. Simply depicts shapes, lines, and colors to translate feelings, emotions, and concepts.</p>
+      <div class="divider"></div>
+      <p style="font-size:13px;"><strong>Example:</strong> Composition VIII by Wassily Kandinsky</p>
+    </div>
+  </div>
+
+  <h3>What is Content in Art?</h3>
+  <div class="highlight">
+    <p>Content refers to the meaning, message, or <em>"why"</em> behind a work. While the subject is what you physically see, the content is the <strong>emotional or intellectual significance</strong> the artist intends to communicate.</p>
+  </div>
+  <p><strong>"Content is inextricably linked with Form."</strong> It is the mass of ideas communicated through:</p>
+  <ul class="styled">
+    <li>The art's imagery</li>
+    <li>The symbolic meaning</li>
+    <li>Its surroundings where it is used or displayed</li>
+    <li>The customs, beliefs, and values of the culture</li>
+  </ul>
+
+  <h3>Three Levels of Meaning</h3>
+  <div class="grid grid-3">
+    <div class="card">
+      <h4>1. Factual Meaning</h4>
+      <p>The literal statement or narrative content directly apprehended because objects are easily recognized. <em>Example: "The painting shows a woman sitting by a window."</em></p>
+    </div>
+    <div class="card">
+      <h4>2. Conventional Meaning</h4>
+      <p>Widely accepted interpretation of specific signs, symbols, or motifs within a particular culture, time period, or group. <em>Example: A cross representing Christianity.</em></p>
+    </div>
+    <div class="card">
+      <h4>3. Subjective Meaning</h4>
+      <p>Interpretation arising from the viewer's personal experiences, emotions, or values, as well as the artist's private symbolic intent.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<section id="forms">
+<div class="container">
+  <div class="section-label"><span class="section-num">03</span>Visual Art</div>
+  <h2>Forms of Visual Art</h2>
+
+  <div class="grid grid-3">
+    <div class="card"><h4>Painting</h4><p>Applying pigment to a surface (canvas, wood, paper, wall) using brushes, knives, or sponges. One of the oldest and most recognized art forms.</p></div>
+    <div class="card"><h4>Drawing</h4><p>Creating images using pencils, charcoal, ink, or pastels. Considered the <strong>foundation of visual arts</strong>. Focuses on line, shading, and form.</p></div>
+    <div class="card"><h4>Sculpture</h4><p>Three-dimensional artworks created by carving, modeling, casting, or assembling materials.</p></div>
+    <div class="card"><h4>Printmaking</h4><p>Creating artwork by printing from a prepared surface. Allows multiple copies of the same design.</p></div>
+    <div class="card"><h4>Photography</h4><p>Capturing images using light-sensitive materials or digital sensors. Used for art, journalism, and documentation.</p></div>
+    <div class="card"><h4>Digital Art</h4><p>Art created using digital technology. Includes digital painting, 3D modeling, and generative art.</p></div>
+    <div class="card"><h4>Architecture</h4><p>Design and construction of buildings — combines beauty and function.</p></div>
+    <div class="card"><h4>Ceramics</h4><p>Creating objects from clay, fired at high temperatures.</p></div>
+    <div class="card"><h4>Textile Arts</h4><p>Art made using fabric, fiber, and thread. Includes weaving, embroidery, quilting, and tapestry.</p></div>
+    <div class="card"><h4>Mosaic</h4><p>Creating images by assembling small pieces of colored glass, stone, or tile. Often used in architecture and decoration.</p></div>
+    <div class="card"><h4>Collage</h4><p>Assembling different materials (paper, photographs, fabric, found objects) onto a surface to create a new composition.</p></div>
+    <div class="card"><h4>Installation Art</h4><p>Large-scale, mixed-media constructions designed to transform a space and create an immersive experience.</p></div>
+    <div class="card"><h4>Performance Art</h4><p>Art in which the artist's actions constitute the artwork, often combining visual elements with movement and time.</p></div>
+    <div class="card"><h4>Video Art</h4><p>Art using moving images and sound displayed on screens or projected, exploring narrative and non-narrative forms.</p></div>
+    <div class="card"><h4>Illustration</h4><p>Creating visual representations to accompany or explain text — used in books, magazines, advertising, and comics.</p></div>
+    <div class="card"><h4>Calligraphy</h4><p>The art of beautiful writing, treating letters and text as visual design elements.</p></div>
+    <div class="card"><h4>Glass Art</h4><p>Creating artwork from glass through blowing, casting, staining, or fusing.</p></div>
+    <div class="card"><h4>Mixed Media</h4><p>Combining multiple artistic techniques and materials in a single artwork.</p></div>
+    <div class="card"><h4>Street Art / Graffiti</h4><p>Art created in public spaces — spray-painted murals, stencils, wheatpastes, and installations.</p></div>
+    <div class="card"><h4>Land Art / Earth Art</h4><p>Large-scale interventions in natural landscapes, using earth, rocks, water, and other natural materials.</p></div>
+  </div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<section id="artists">
+<div class="container">
+  <div class="section-label"><span class="section-num">04</span>Creators of Art</div>
+  <h2>Artists & Artisans</h2>
+
+  <div class="highlight">
+    <p>An <strong>artist</strong> is generally defined as an art practitioner — a painter, sculptor, actor, writer, poet, musician, and the like — who produces or creates indirectly functional arts with aesthetic value using imagination.</p>
+  </div>
+
+  <h3>Types of Artists</h3>
+  <div class="grid grid-2">
+    <div class="card">
+      <h4>Painter</h4>
+      <p>Creates images using paint on surfaces like canvas, paper, walls, or wood. Uses colors, shapes, and techniques to express ideas, emotions, or scenes.</p>
+      <p><strong>Example:</strong> Leonardo da Vinci — Mona Lisa, The Last Supper</p>
+    </div>
+    <div class="card">
+      <h4>Sculptor</h4>
+      <p>Creates three-dimensional works by carving, molding, or assembling materials like stone, metal, wood, or clay.</p>
+      <p><strong>Example:</strong> Michelangelo — David, Pietà, Sistine Chapel</p>
+    </div>
+    <div class="card">
+      <h4>Musician</h4>
+      <p>Creates or performs music using instruments, voice, or digital tools. Expresses emotions and ideas through sound, rhythm, and melody.</p>
+      <p><strong>Example:</strong> Ludwig van Beethoven — Symphony No. 5 (struggle and victory)</p>
+    </div>
+    <div class="card">
+      <h4>Writer</h4>
+      <p>Creates stories, poems, articles, or other texts using words to express ideas, emotions, or information.</p>
+      <p><strong>Example:</strong> William Shakespeare — Hamlet, Romeo and Juliet, Macbeth</p>
+    </div>
+    <div class="card">
+      <h4>Actor</h4>
+      <p>Portrays characters in plays, movies, or TV shows using speech, body language, and emotions to bring stories to life.</p>
+    </div>
+    <div class="card">
+      <h4>Artisan</h4>
+      <p>A skilled craftsperson who creates objects by hand using traditional techniques, focusing on both functionality and aesthetic quality. Products reflect cultural traditions.</p>
+    </div>
+  </div>
+
+  <h3>Filipino Artisans</h3>
+  <div class="grid grid-3">
+    <div class="card"><h4>Weaving</h4><p>Interlacing threads or fibers to create fabric. Examples: <em>Inabel</em> (Ilocos — cotton with geometric patterns), <em>Malong</em> (Mindanao — abaca cloth).</p></div>
+    <div class="card"><h4>Pottery / Ceramics</h4><p>Shaping and firing clay to create functional and decorative objects. Uses local clay and traditional firing techniques.</p></div>
+    <div class="card"><h4>Woodcarving</h4><p>Shaping and decorating wood through carving techniques. Famous example: Paete, Laguna woodcarvers.</p></div>
+    <div class="card"><h4>Metal & Jewelry</h4><p>Crafting metals into ornaments and functional items — necklaces, bracelets, rings, and tools — reflecting cultural identity. Kalinga and Mindanao artisans.</p></div>
+    <div class="card"><h4>Basketry</h4><p>Weaving and crafting natural materials like bamboo, rattan, and palm leaves to create baskets and everyday items. Rural and indigenous Filipino artisans.</p></div>
+  </div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<section id="movements">
+<div class="container">
+  <div class="section-label"><span class="section-num">05</span>History of Art</div>
+  <h2>Art Movements Through the Ages</h2>
+
+  <h3>Art in Early Civilizations</h3>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-period">Stone Age / Paleolithic Era</div>
+      <div class="tl-title">Cave Art</div>
+      <div class="tl-desc">Found in caves from early prehistoric societies. Made using natural pigments. Subjects: animals, hunting scenes, human figures. Focused on survival, rituals, and communication. Considered advanced for their time. <em>Examples: Hall of Bulls (Lascaux); Cueva de las Manos; Venus of Willendorf; Stonehenge</em></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-period">Ancient Egypt — 2686–1069 BCE</div>
+      <div class="tl-title">Egyptian Art</div>
+      <div class="tl-desc"><strong>Old Kingdom:</strong> Pyramids of Giza, Narmer Palette. <strong>Middle Kingdom:</strong> Portrait sculptures, rock-cut tombs, fresco paintings. <strong>New Kingdom / Amarna Period:</strong> King Akhenaten and Queen Nefertiti led a revolution (capital moved to Tel El-Amarna). Tutankhamun's Tomb.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-period">Ancient Greece</div>
+      <div class="tl-title">Greek Art — Four Periods</div>
+      <div class="tl-desc">Greeks valued poetry, drama, and philosophy. Art required skill sets and body of knowledge. Theater originated with followers of Dionysus. Periods: <strong>Geometric</strong> (Dipylon Amphora — funerary vase with geometric patterns), <strong>Archaic</strong> (Kouros Statues — rigid, Egyptian-influenced, Archaic smile), <strong>Classical</strong> (Parthenon — dedicated to Athena, peak of Greek art), <strong>Hellenistic</strong> (Laocoon and His Sons — intense emotion and drama).</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-period">Ancient Rome — c. 500 BCE</div>
+      <div class="tl-title">Roman Art</div>
+      <div class="tl-desc">Established around 500 BCE. Came of age during the Hellenistic Period. Romans admired Greek achievements — fusion of Greek and Roman culture. Known for realism and grand monuments. <em>Examples: Colosseum (holds ~50,000 spectators); Perseus and Medusa (Benvenuto Cellini)</em></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-period">Middle Ages — c. 500–1500</div>
+      <div class="tl-title">Medieval Art</div>
+      <div class="tl-desc">Period between decline of the Roman Empire and the Renaissance. Church was the central figure. Two cathedral styles: <strong>Romanesque (1050–1200)</strong> inspired by Rome (e.g., Pisa Cathedral); <strong>Gothic (1200–1500)</strong> with pointed arches, flying buttresses, stained glass (e.g., Notre Dame Cathedral).</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-period">Renaissance — c. 1400–1600</div>
+      <div class="tl-title">Renaissance Art</div>
+      <div class="tl-desc">Artists valued the "individual." Humanism shifted focus to empower the individual. Emphasized naturalism and proportionality of the human body. Non-religious themes also explored. Revival of Roman theatrical plays. <em>Examples: Mona Lisa and The Last Supper (da Vinci); David (Michelangelo)</em></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-period">c. 1520–1600</div>
+      <div class="tl-title">Mannerism</div>
+      <div class="tl-desc">Product of the Renaissance. Artists began copying from existing works rather than nature. Characterized by distorted figures, two-dimensional spaces, discordant colors, and lack of defined focal point. <em>Example: Madonna with Long Neck (Parmigianino) — very long neck and elongated limbs.</em></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-period">Baroque — 1600–1750</div>
+      <div class="tl-title">Baroque & Rococo Art</div>
+      <div class="tl-desc">From Portuguese "barocco" — irregularly shaped pearl. Birthplace: Rome, seen as a response to Protestantism. Colorful palettes, ornamentation, and dramatic emotion. Music also flourished — Bach, Handel, Vivaldi. <strong>Rococo</strong>: From French "rocaille." Light, ornate, playful — soft pastels, C/S curves, aristocratic pleasure. <em>Examples: The Assumption of the Virgin; The Four Seasons (Vivaldi); The Swing (Rococo)</em></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-period">Late 18th–Early 19th Century</div>
+      <div class="tl-title">Neoclassicism</div>
+      <div class="tl-desc">Emerged partly from the French Revolution (1789). Aimed to revive Greek and Roman influences. A reaction against Baroque extravagance — aligned with Enlightenment principles. <em>Example: Paolina Borghese as Venus Victrix</em></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-period">19th Century</div>
+      <div class="tl-title">Romanticism</div>
+      <div class="tl-desc">Used Neoclassicism as a springboard. Highlighted heroic elements, nationalistic movements. Focus on goodness of mankind, justice, equality, social order, emotions, and feelings. <em>Example: The Raft of the Medusa — human suffering, heroism, and desperation.</em></div>
+    </div>
+  </div>
+
+  <h3>Modern Art Movements (1840s–1970s)</h3>
+  <table class="styled-table">
+    <thead><tr><th>Movement</th><th>Period</th><th>Key Characteristics</th><th>Notable Examples</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Realism</strong></td><td>mid-1840s</td><td>Real-life situations — farmers, workers, daily activities. Avoided exaggeration and fantasy.</td><td>Stone Breakers (Courbet); The Gleaners (Millet)</td></tr>
+      <tr><td><strong>Impressionism</strong></td><td>1860s–1880s</td><td>Capture a moment in time. Short, loose brush strokes. Focus on light, color, outdoor scenes.</td><td>Impression Sunrise (Monet); Dance at Le Moulin de la Galette (Renoir)</td></tr>
+      <tr><td><strong>Post-Impressionism</strong></td><td>1880s–1900s</td><td>Focus on emotion, structure, and personal expression. Each artist developed a unique style.</td><td>Starry Night (Van Gogh); Mont Sainte-Victoire (Cézanne)</td></tr>
+      <tr><td><strong>Neo-Impressionism</strong></td><td>1880–1890s</td><td>Scientific approach to color — small dots of pure color (Pointillism). Colors blend in viewer's eyes.</td><td>A Sunday Afternoon on the Island of La Grande Jatte (Seurat)</td></tr>
+      <tr><td><strong>Art Nouveau</strong></td><td>1890s–1910s</td><td>Decorative and flowing designs inspired by nature. Applied to architecture, furniture, posters, jewelry.</td><td>Casa Batlló (Gaudí); Secession Building (Olbrich)</td></tr>
+      <tr><td><strong>Fauvism</strong></td><td>Early 1900s</td><td>Very bright, bold, unnatural colors to express emotion. "Les Fauves" = The Wild Beasts.</td><td>The River Seine at Chatou (Derain)</td></tr>
+      <tr><td><strong>Expressionism</strong></td><td>c. 1885–1930s</td><td>Heavily textured paint, twisted forms, vivid non-naturalistic colors. Conveys inner feelings. Founded by Van Gogh, Munch, Ensor. German Expressionism ended in 1933.</td><td>The Scream (Munch)</td></tr>
+      <tr><td><strong>Cubism</strong></td><td>Early 20th century</td><td>Broke down objects into geometric shapes, shown from multiple viewpoints simultaneously.</td><td>Les Demoiselles d'Avignon (Picasso); Pablo Picasso — co-founder</td></tr>
+      <tr><td><strong>Futurism</strong></td><td>Early 20th century</td><td>Celebrated speed, movement, technology, and machines. Dynamic forms and repeated lines.</td><td>The Cyclist (Goncharova); The City Rises (Boccioni)</td></tr>
+      <tr><td><strong>Abstract Expressionism</strong></td><td>Early 1940s–mid-1960s</td><td>Post-WWII American. Spontaneous visual articulation of emotion. Action Painting & Color-field Painting.</td><td>Convergence (Pollock); Cathedra (Newman)</td></tr>
+      <tr><td><strong>Op Art</strong></td><td>Early 1960s</td><td>Uses optical illusion to create sensation of movement and depth. Color, patterns, and perspective.</td><td>Movement in Squares (Riley); Zebra (Vasarely)</td></tr>
+      <tr><td><strong>Kinetic Art</strong></td><td>Early 1950s</td><td>Incorporates actual movement. Powered by wind, engines, electricity, gravity, or water.</td><td>Strandbeests (Theo Jansen); Black Widow (Calder)</td></tr>
+      <tr><td><strong>Gutai</strong></td><td>1950s Japan</td><td>Physical interaction between the body and materials is the artwork itself. Preceded performance art.</td><td>Challenging Mud (Shiraga Kazuo)</td></tr>
+      <tr><td><strong>Minimalism</strong></td><td>Early 1960s</td><td>Reaction against Abstract Expressionism. Simple geometric shapes and color fields.</td><td>Equivalent VIII (Carl Andre); The Tree (Agnes Martin)</td></tr>
+      <tr><td><strong>Pop Art</strong></td><td>1950s</td><td>Draws from commercial culture and materials.</td><td>Campbell's Soup Cans (Warhol); Look Mickey (Lichtenstein)</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Postmodern & Contemporary Art</h3>
+  <div class="grid grid-2">
+    <div class="card">
+      <h4>Postmodern Art (1970s–1990s)</h4>
+      <p>Reaction against Modern art. Rejects strict rules, originality, and single meanings. Focuses on irony, parody, mixing styles, and questioning reality.</p>
+      <div class="tags">
+        <span class="tag">Conceptual Art</span>
+        <span class="tag">Installation Art</span>
+        <span class="tag">Appropriation Art</span>
+        <span class="tag">Neo-Expressionism</span>
+        <span class="tag">Video Art</span>
+        <span class="tag">Feminist Art</span>
+        <span class="tag">Young British Artists</span>
+      </div>
+    </div>
+    <div class="card">
+      <h4>Contemporary Art (Late 20th C.–Present)</h4>
+      <p>Known for diversity, experimentation, and freedom of expression. Reflects current social, political, cultural, and technological issues.</p>
+      <div class="tags">
+        <span class="tag gold">Neo-Pop Art</span>
+        <span class="tag gold">Photorealism</span>
+        <span class="tag gold">Conceptualism</span>
+        <span class="tag gold">Performance Art</span>
+        <span class="tag gold">Earth Art</span>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<section id="literary">
+<div class="container">
+  <div class="section-label"><span class="section-num">06</span>Module 5, Lesson 3</div>
+  <h2>Literary Arts</h2>
+
+  <div class="highlight">
+    <p>Literary arts is a form of <strong>creative writing</strong> such as poems, stories, and essays that express a person's thoughts, feelings, and experiences. They include academic forms such as essays, reports, and research papers — important not only for creativity and entertainment but also for <strong>education and learning</strong>.</p>
+  </div>
+
+  <h3>Elements of Literary Arts</h3>
+  <div class="grid grid-2">
+    <div class="card"><h4>Plot</h4><p>The sequence of events that drive the story.</p></div>
+    <div class="card"><h4>Character</h4><p>The people (or animals, etc.) in the story, with their own traits and motivations.</p></div>
+    <div class="card"><h4>Setting</h4><p>The time and place where the story happens.</p></div>
+    <div class="card"><h4>Theme</h4><p>The underlying message or idea the writer is trying to convey.</p></div>
+    <div class="card"><h4>Style</h4><p>The writer's unique voice, tone, and language use.</p></div>
+    <div class="card"><h4>Point of View</h4><p>Who's telling the story (e.g., first person, third person).</p></div>
+    <div class="card"><h4>Symbolism</h4><p>Objects, colors, etc. that represent bigger ideas.</p></div>
+    <div class="card"><h4>Imagery</h4><p>Language that appeals to the senses and creates vivid pictures.</p></div>
+  </div>
+
+  <h3>Classification of Literary Arts</h3>
+
+  <h4>Poetry</h4>
+  <p>A form using aesthetic and rhythmic qualities of language, often in lines and stanzas.</p>
+  <div class="grid grid-3">
+    <div class="card"><h4>Narrative Poetry</h4><p>Tells a story with a plot, characters, setting, and defined beginning, middle, and end. <em>Examples: The Iliad, The Odyssey (Homer)</em></p></div>
+    <div class="card"><h4>Metrical Poetry</h4><p>Structured by a consistent, rhythmic pattern of stressed and unstressed syllables (meter). <em>Example: Shakespeare's sonnets</em></p></div>
+    <div class="card"><h4>Free Verse</h4><p>An open form that does not use consistent meter, rhyme, or musical rhythm. <em>Example: Modern poetry collections</em></p></div>
+  </div>
+
+  <h4>Prose</h4>
+  <p>The most common form of writing, using natural language, standard grammar, and conversational flow arranged in sentences and paragraphs.</p>
+  <div class="grid grid-2">
+    <div class="card">
+      <h4>Fiction</h4>
+      <p>Literature in prose describing imaginary events and people.</p>
+      <ul class="styled" style="font-size:13px;margin-top:8px;">
+        <li><strong>Novels</strong> — Long fictional narrative. <em>Pride and Prejudice (Austen)</em></li>
+        <li><strong>Short Stories</strong> — 1,000–20,000 words, read in one sitting. <em>The Cask of Amontillado (Poe)</em></li>
+        <li><strong>Fables</strong> — Short story teaching a moral lesson; animals with human traits. <em>The Boy Who Cried Wolf (Aesop)</em></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Non-Fiction</h4>
+      <p>Based on facts, real events, and actual people. Intended to inform, teach, or document reality.</p>
+      <ul class="styled" style="font-size:13px;margin-top:8px;">
+        <li><strong>Biographies</strong> — Life of a person, written by someone else. <em>Alexander Hamilton (Ron Chernow)</em></li>
+        <li><strong>Autobiographies</strong> — Person writes about their own life. <em>Diary of a Young Girl (Anne Frank)</em></li>
+        <li><strong>Essays</strong> — Author's argument or analysis on a topic. <em>Politics and the English Language (Orwell)</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <h4>Drama</h4>
+  <p>A representation through dialogue and performance — a story acted out on stage, film, or radio.</p>
+  <table class="styled-table">
+    <thead><tr><th>Type</th><th>Description</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Tragedy</strong></td><td>Serious genre; portrays the downfall of a hero due to a personal flaw or fate.</td><td>Hamlet (Shakespeare)</td></tr>
+      <tr><td><strong>Comedy / Dramedy</strong></td><td>Hybrid genre blending humorous moments with serious themes.</td><td>Little Miss Sunshine</td></tr>
+      <tr><td><strong>Tragicomedy</strong></td><td>Combines sad/serious situations with humor; often a bittersweet ending.</td><td>Eternal Sunshine of the Spotless Mind</td></tr>
+      <tr><td><strong>Melodrama</strong></td><td>Exaggerated, emotional story with clear heroes and villains.</td><td>Titanic</td></tr>
+      <tr><td><strong>Farce</strong></td><td>Comedy with exaggerated characters, improbable situations, and physical humor.</td><td>The Importance of Being Earnest</td></tr>
+      <tr><td><strong>One-Act Play</strong></td><td>Short, self-contained dramatic work (15–60 minutes), no intermission.</td><td>Ile (Eugene O'Neill)</td></tr>
+      <tr><td><strong>Musical Drama</strong></td><td>Integrates acting, spoken dialogue, songs, and dance.</td><td>Wicked</td></tr>
+    </tbody>
+  </table>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<section id="theater">
+<div class="container">
+  <div class="section-label"><span class="section-num">07</span>Theatrical Art</div>
+  <h2>Theater Arts</h2>
+
+  <div class="highlight">
+    <p><strong>Theater Arts</strong> is a collaborative form of fine art that uses live performers to present the experience of a real or imagined event before a live audience. It features <strong>live interaction</strong>, is <strong>multidisciplinary</strong> (acting, directing, design, technical elements), and aims to <strong>convey a story or evoke specific emotions</strong>.</p>
+  </div>
+
+  <h3>History of Theater</h3>
+  <div class="grid grid-2">
+    <div class="card"><h4>Ancient Roots</h4><p>Began with Greek dramatic festivals honoring Dionysus — the foundation of Western theater.</p></div>
+    <div class="card"><h4>Roman Influence</h4><p>Adapted Greek traditions; focused on entertainment, stage design, and spectacle.</p></div>
+    <div class="card"><h4>Medieval Period</h4><p>Mystery and Morality plays shifted from religious to secular themes. Theater stages became smaller.</p></div>
+    <div class="card"><h4>Renaissance</h4><p>Revival of classics, famously led by playwrights like William Shakespeare.</p></div>
+    <div class="card"><h4>19th Century</h4><p>Realism emerged as a dominant theatrical style.</p></div>
+    <div class="card"><h4>20th Century – Today</h4><p>Experimental and avant-garde movements emerged, pushing boundaries. Theater continues to evolve with diverse styles.</p></div>
+  </div>
+
+  <h3>Core Elements of Theater</h3>
+  <div class="grid grid-2">
+    <div class="card"><h4>1. Acting</h4><p>The "cornerstone" of theater. Performers embody characters through dialogue, movement, and emotion.</p></div>
+    <div class="card"><h4>2. Directing</h4><p>The unifying vision of the production. The Director guides actors and designers to ensure a cohesive performance.</p></div>
+    <div class="card"><h4>3. Plot</h4><p>The sequence of events. Typically follows a Beginning, Middle, and End to allow for character growth.</p></div>
+    <div class="card"><h4>4. Set Design</h4><p>The physical environment on stage. Uses scenery, backdrops, and props to create atmosphere and context.</p></div>
+    <div class="card"><h4>5. Characters</h4><p>Protagonists (main hero), Antagonists (opposition), and Foils. Introduced early in the script.</p></div>
+    <div class="card"><h4>6. Costume Design</h4><p>Visual storytelling through clothing. Defines character's personality, social status, and time period.</p></div>
+    <div class="card"><h4>7. Lighting & Sound</h4><p>Technical tools that create mood, highlight focal points, and immerse the audience.</p></div>
+    <div class="card"><h4>8. Script</h4><p>The written foundation of the performance. A blueprint guiding actors and technical crews.</p></div>
+  </div>
+
+  <h3>Audience Engagement & Conventions</h3>
+  <div class="grid grid-3">
+    <div class="card"><h4>Fourth Wall</h4><p>The invisible boundary between performers and audience. Can be broken for dramatic effect.</p></div>
+    <div class="card"><h4>Interactive / Participatory</h4><p>Audiences become part of the performance.</p></div>
+    <div class="card"><h4>Dramatic Convention</h4><p>Shared theatrical rules that shape how stories are told. Examples: Monologue, Aside, Freeze Frame.</p></div>
+  </div>
+
+  <h3>Types of Theater</h3>
+  <div class="grid grid-2">
+    <div class="card"><h4>Traditional Theater</h4><p>Classical plays, musicals, and operas adhering to established conventions.</p></div>
+    <div class="card"><h4>Experimental Theater</h4><p>Pushes boundaries of traditional forms with unconventional narratives and avant-garde techniques.</p></div>
+    <div class="card"><h4>Physical Theater</h4><p>Emphasizes the body as primary storytelling tool. Combines movement, gesture, and expression.</p></div>
+    <div class="card"><h4>Interactive Theater</h4><p>Engages the audience directly, blurring lines between performers and spectators.</p></div>
+    <div class="card"><h4>Multimedia Theater</h4><p>Incorporates audiovisual effects, projections, and digital media to enhance the experience.</p></div>
+  </div>
+
+  <h3>Stage Types</h3>
+  <div class="grid grid-2">
+    <div class="card"><h4>Proscenium Stage</h4><p>Traditional framed stage with audience seated in front.</p></div>
+    <div class="card"><h4>Thrust Stage</h4><p>Audience seated on three sides. Stage extends into auditorium.</p></div>
+    <div class="card"><h4>Theater-in-the-Round</h4><p>Audience seated all around the performance area.</p></div>
+    <div class="card"><h4>Black Box / Flexible</h4><p>Adaptable space for creative staging.</p></div>
+  </div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<section id="music">
+<div class="container">
+  <div class="section-label"><span class="section-num">08</span>Module 3, Lesson 4</div>
+  <h2>Music — The Art of Organized Sound</h2>
+
+  <div class="highlight">
+    <p>Music is an art form that combines vocal or instrumental sounds designed for <strong>aesthetic experience, emotional impact, and cultural meaning</strong>. While nature provides noise, humanity provides the structure.</p>
+  </div>
+
+  <h3>Elements of Music</h3>
+  <div class="grid grid-3">
+    <div class="card"><h4>Rhythm</h4><p>The pattern of time. The duration and placement of sounds. Long sounds, short sounds, rest.</p></div>
+    <div class="card"><h4>Melody</h4><p>The tune. A linear succession of musical tones — the main tune of a song, what you remember when you hum.</p></div>
+    <div class="card"><h4>Harmony</h4><p>The vertical structure. Simultaneous notes played together. e.g., choir, guitar and piano playing at the same time.</p></div>
+    <div class="card"><h4>Timbre</h4><p>The tone quality or "color." What makes it sound different from other instruments or voices. (e.g., Ariana Grande vs. Adele singing the same note)</p></div>
+    <div class="card"><h4>Dynamics</h4><p>The variation in loudness or softness (intensity). e.g., Bohemian Rhapsody moves from soft piano to loud operatic sections.</p></div>
+  </div>
+
+  <h3>Criteria of Music as Art</h3>
+  <div class="grid grid-3">
+    <div class="card"><h4>Aesthetic Intent</h4><p>Created specifically for an aesthetic experience and emotional impact, rather than purely functional utility.</p></div>
+    <div class="card"><h4>Cultural Standards</h4><p>The norms, traditions, and expectations within a culture that guide how music is created, performed, and evaluated.</p></div>
+    <div class="card"><h4>Historical Continuity</h4><p>The preservation and transmission of artistic, cultural, or social traditions over time across generations.</p></div>
+  </div>
+
+  <h3>Global Evolution of Music</h3>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-period">3000 BCE – 500 BCE</div>
+      <div class="tl-title">Ancient Civilization</div>
+      <div class="tl-desc">Served primarily religious, ceremonial, and social functions. Instruments: lyres, harps, flutes, drums. Vocal chants were the main element. <em>Example: Hurrian Hymn No. 6 (c. 1400 BCE) — oldest known melody, played with lyre.</em></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-period">500–1400 CE</div>
+      <div class="tl-title">Medieval</div>
+      <div class="tl-desc">Dominated by the Christian Church. Monophonic Gregorian chants. Instruments: lute, vielle, organ. Gradual evolution of musical notation. <em>Example: Gregorian Chant</em></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-period">1400–1600</div>
+      <div class="tl-title">Renaissance</div>
+      <div class="tl-desc">Flourishing of harmony and vocal polyphony. More expressive and structured. Counterpoint and balanced textures. Instruments: lute, viol, recorder. Music increasingly printed. <em>Example: "Ave Maria" by Josquin des Prez</em></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-period">1600–1750</div>
+      <div class="tl-title">Baroque</div>
+      <div class="tl-desc">Emphasized ornamentation, contrast, and emotional expression. Rise of instrumental forms: fugue, concerto, opera. Instruments: harpsichord, violin, organ. <em>Example: Brandenburg Concerto No. 3 (Bach, 1721)</em></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-period">1750–1820</div>
+      <div class="tl-title">Classical</div>
+      <div class="tl-desc">Valued clarity, balance, and structural form (reaction against Baroque complexity). Developed symphonies, sonatas, and string quartets. Performed in courts, salons, and public concert halls. <em>Example: Symphony No. 40 (Mozart, 1788)</em></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-period">1800–1900</div>
+      <div class="tl-title">Romantic</div>
+      <div class="tl-desc">Reaction against rationalism and Industrial Revolution social changes. Emotional expression, dramatic storytelling, national identity. Expanded orchestras. Inspired by literature, nature, or history. <em>Example: Symphonie Fantastique (Berlioz, 1830)</em></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-period">20th Century – Present</div>
+      <div class="tl-title">Modern</div>
+      <div class="tl-desc">Experimentation, innovation, and diversity. New scales, electronic instruments, digital sound. Led to jazz, rock, and electronic music. <em>Example: "Tadhana" by Up Dharma Down (2012)</em></div>
+    </div>
+  </div>
+
+  <h3>Music in the Philippine Context</h3>
+  <div class="grid grid-3">
+    <div class="card">
+      <h4>Indigenous Roots</h4>
+      <p>Deeply connected to daily life, rites, and rituals. Functional, spiritual, and communal. <strong>Kulintang Gong Ensemble</strong> — reflects ancient traditions; a marker of indigenous identity.</p>
+    </div>
+    <div class="card">
+      <h4>Spanish Influence</h4>
+      <p>Introduction of Western melody and Christianity blended with local traditions. <strong>Harana (Serenade)</strong> — courtship tradition fusing indigenous customs and Hispanic musical structures.</p>
+    </div>
+    <div class="card">
+      <h4>American Influence & OPM</h4>
+      <p>Formal education and pop genres evolved into Original Pilipino Music. <strong>Kundiman</strong> — elevated by Francisco Santiago & Nicanor Abelardo; expresses Filipino sentimentality and patriotism.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<section id="dance">
+<div class="container">
+  <div class="section-label"><span class="section-num">09</span>Dance as Art</div>
+  <h2>Dance</h2>
+
+  <div class="highlight">
+    <p>Dance is a <strong>performing art that uses intentional and rhythmic body movement</strong> to express emotion, ideas, and culture. It is considered art because it communicates meaning through movement, creativity, and interpretation. It is one of the oldest art forms in human history.</p>
+  </div>
+
+  <h3>Elements of Dance</h3>
+  <div class="grid grid-3">
+    <div class="card"><h4>Body</h4><p>The instrument used to create movement. Using arms to create shapes, isolating shoulders, contracting the torso.</p></div>
+    <div class="card"><h4>Action</h4><p>Movements such as jumping, turning, sliding, and gesturing. Leaping, spinning in a pirouette, sliding into a floor move.</p></div>
+    <div class="card"><h4>Space</h4><p>Direction, level, pathway, and positioning in the performance area. Traveling diagonally, dancing at low level, or forming pathways.</p></div>
+    <div class="card"><h4>Time</h4><p>Rhythm, tempo, and beat of the movement. Moving slowly to a ballad, hitting sharp beats in hip-hop, or flowing with jazz rhythms.</p></div>
+    <div class="card"><h4>Energy</h4><p>The force and quality of movement. A strong, explosive jump versus a soft, fluid arm wave; sharp staccato gestures versus smooth flow.</p></div>
+  </div>
+
+  <h3>History of Dance</h3>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-period">Ancient Period</div>
+      <div class="tl-title">Ritual & Ceremonial Dance</div>
+      <div class="tl-desc">Ritual dances, Greek maenad dances, Bharatanatyam (India). Symbolic, often tied to religion and mythology. Used in ceremonies, storytelling, worship, and community bonding.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-period">Renaissance Period</div>
+      <div class="tl-title">Court Dances</div>
+      <div class="tl-desc">Pavane, Minuet, Galliard, Masques. Structured, elegant, and refined movements. Entertainment in royal courts, social gatherings, and festivals.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-period">Modern Period</div>
+      <div class="tl-title">Contemporary Dance Forms</div>
+      <div class="tl-desc">Ballet, Jazz, Contemporary, Hip-Hop. Technical precision, expressive freedom, and rhythmic energy. Focuses on artistic performance, cultural expression, social identity, and innovation.</div>
+    </div>
+  </div>
+
+  <h3>Types of Dance</h3>
+  <div class="grid grid-2">
+    <div class="card"><h4>Folk Dance</h4><p>Traditional dance representing the culture, history, and customs of a specific community or country. In the Philippines, folk dances show hospitality, courtship traditions, and rural life.</p></div>
+    <div class="card"><h4>Ballet</h4><p>A highly technical and formal style originating during the Renaissance in Europe. Combines movement, music, costume, and stage design to create a complete theatrical experience.</p></div>
+    <div class="card"><h4>Modern & Contemporary Dance</h4><p>Developed as a reaction against the strict rules of ballet. Emphasizes freedom of movement and personal expression.</p></div>
+    <div class="card"><h4>Social & Street Dance</h4><p>Developed in communities, performed in social settings or public spaces. Emphasizes individuality, freestyle movement, and rhythm.</p></div>
+  </div>
+
+  <h3>Dance as Art — Three Functions</h3>
+  <div class="grid grid-3">
+    <div class="card"><h4>Emotional Expression</h4><p>Communicates emotion without the use of words.</p></div>
+    <div class="card"><h4>Cultural Storytelling</h4><p>Tells stories, traditions, and cultural values.</p></div>
+    <div class="card"><h4>Reflection of Identity</h4><p>Reflects identity and shared human experience.</p></div>
+  </div>
+
+  <h3>Importance of Dance in Culture</h3>
+  <ul class="styled">
+    <li>Preserves cultural traditions and rituals</li>
+    <li>Encourages creativity and self-expression</li>
+    <li>Strengthens community connection and cultural identity</li>
+  </ul>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<section id="architecture">
+<div class="container">
+  <div class="section-label"><span class="section-num">10</span>Architectural Arts</div>
+  <h2>Architecture</h2>
+
+  <div class="highlight">
+    <p>Architecture is <strong>the art and science of designing and constructing buildings and structures</strong>. It combines <strong>Creativity (Art), Technical Knowledge (Engineering), Functionality (Use),</strong> and <strong>Aesthetic Value (Beauty)</strong>. Its purposes: provide shelter, create functional spaces, express culture and identity, improve quality of life.</p>
+  </div>
+
+  <h3>Elements of Architectural Design</h3>
+  <div class="grid grid-3">
+    <div class="card"><h4>Line</h4><p>Defines edges and structure; guides the eye. <strong>Vertical</strong> = strength; <strong>Horizontal</strong> = calmness; <strong>Diagonal</strong> = movement/energy.</p></div>
+    <div class="card"><h4>Shape</h4><p>Two-dimensional area. <strong>Geometric</strong>: square, rectangle, circle. <strong>Organic</strong>: natural, irregular shapes.</p></div>
+    <div class="card"><h4>Form</h4><p>Three-dimensional shape (cube, sphere, cylinder). Gives buildings volume and creates structure.</p></div>
+    <div class="card"><h4>Space</h4><p><strong>Positive space</strong> = occupied. <strong>Negative space</strong> = empty. Rooms, hallways, open areas.</p></div>
+    <div class="card"><h4>Texture</h4><p>Surface quality (smooth glass, rough concrete, wood, brick). Adds visual interest and enhances appearance.</p></div>
+    <div class="card"><h4>Color</h4><p>Improves appearance, creates mood, adds beauty. White = clean/simple; Dark = strong/formal; Bright = energetic/lively.</p></div>
+  </div>
+
+  <h3>Principles of Architecture</h3>
+  <div class="grid grid-3">
+    <div class="card"><h4>Balance</h4><p>Equal distribution of visual weight. <strong>Symmetrical</strong> or <strong>Asymmetrical</strong>. Makes buildings look stable. <em>Example: Taj Mahal</em></p></div>
+    <div class="card"><h4>Proportion</h4><p>Relationship between sizes of parts. Ensures harmony and realistic design. Proper sizing of doors, windows, walls.</p></div>
+    <div class="card"><h4>Rhythm</h4><p>Repetition of elements. Creates movement, pattern, and flow. <em>Examples: Repeating windows, repeating columns.</em></p></div>
+    <div class="card"><h4>Emphasis</h4><p>Highlights the most important part. Attracts attention, creates a focal point. <em>Examples: Main entrance, tower, dome (Eiffel Tower).</em></p></div>
+    <div class="card"><h4>Unity</h4><p>All parts work together. Creates harmony; building looks complete. Same colors, materials, style. <em>Example: Sydney Opera House</em></p></div>
+  </div>
+
+  <h3>Major Architectural Styles</h3>
+  <table class="styled-table">
+    <thead><tr><th>Style</th><th>Period</th><th>Key Features</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Classical</strong></td><td>5th c. BCE (Greece), 3rd c. BCE (Rome)</td><td>Columns, pediments, rectangular windows, marble and stone. Revived in Italian Renaissance.</td><td>Maison Carrée</td></tr>
+      <tr><td><strong>Byzantine</strong></td><td>4th–15th century</td><td>Domed churches, interior prioritized over exterior, marble, thick mortar. Christian influence.</td><td>Basilica di San Marco</td></tr>
+      <tr><td><strong>Gothic</strong></td><td>12th–16th century</td><td>Pointed roofs, flying buttresses, stained glass windows, tracery. <em>Early Gothic (1120–1200), High Gothic (1200–1280), Late Gothic (1280–1500).</em></td><td>Notre-Dame de Paris</td></tr>
+      <tr><td><strong>Renaissance</strong></td><td>1400–1600 (Italy)</td><td>Rectangular columns, symmetry, ashlar masonry, classical elements. <em>Early, High, Mannerism phases.</em></td><td>Florence Duomo</td></tr>
+      <tr><td><strong>Baroque</strong></td><td>Late 16th c. – Early 18th c.</td><td>Dynamic oval layouts, dramatic height, contrasting lighting, vividly painted ceilings. Response to Protestant Reformation.</td><td></td></tr>
+      <tr><td><strong>Medieval</strong></td><td>Post-Roman Empire</td><td>Sacred/spiritual spaces, expanded cathedral layouts, stained glass. Romanesque (1066–1200), Gothic (1200–1500).</td><td>Malešov Fortress</td></tr>
+      <tr><td><strong>Victorian</strong></td><td>1830–1910</td><td>Multi-storey buildings, decorative finials, elaborate maximalist design. Diverse substyles.</td><td>Palace of Westminster</td></tr>
+      <tr><td><strong>Modern</strong></td><td>20th century</td><td>Functional design, simple open layouts, large windows, minimalistic lines. Post-WWI.</td><td>Modern houses, early skyscrapers</td></tr>
+      <tr><td><strong>International</strong></td><td>1920s (Europe), 1930s (US)</td><td>Simple rectilinear forms, minimal decoration, extensive glass and steel.</td><td>Skyscrapers</td></tr>
+      <tr><td><strong>Contemporary</strong></td><td>Post-WWII – Present</td><td>Unconventional, curved forms, open floor plans, green roofs/living walls. Focuses on sustainability.</td><td>Sydney Opera House</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Importance of Architecture</h3>
+  <ul class="styled">
+    <li><strong>Human Experience</strong> — Influences how people live, work, and interact by designing spaces that affect mood, productivity, and comfort.</li>
+    <li><strong>Cultural Expression</strong> — Buildings and cities express a society's history, values, and traditions.</li>
+    <li><strong>Safety & Functionality</strong> — Ensures structures are stable, safe, and suited to their purpose.</li>
+    <li><strong>Health & Well-being</strong> — Good design promotes health, accessibility, natural light, and ventilation.</li>
+    <li><strong>Innovation</strong> — Integrates new materials, engineering, and smart technologies.</li>
+    <li><strong>Inspiration</strong> — Iconic architecture can inspire people, foster creativity, and become symbols of national pride.</li>
+  </ul>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<section id="planes">
+<div class="container">
+  <div class="section-label"><span class="section-num">11</span>Spatial Representation</div>
+  <h2>Planes & Perspectives in Art</h2>
+
+  <h3>Planes in Art</h3>
+  <p>A <strong>plane</strong> is a flat, two-dimensional surface that extends in height and width. In art, planes help organize space and create the illusion of depth.</p>
+  <div class="grid grid-2">
+    <div class="card"><h4>Picture Plane</h4><p>The flat surface of the artwork (canvas, paper, wall, etc.).</p></div>
+    <div class="card"><h4>Foreground Plane</h4><p>The part of the artwork closest to the viewer.</p></div>
+    <div class="card"><h4>Middle Ground Plane</h4><p>The area between foreground and background.</p></div>
+    <div class="card"><h4>Background Plane</h4><p>The area farthest from the viewer.</p></div>
+  </div>
+
+  <h3>Perspectives in Art</h3>
+  <div class="highlight">
+    <p>Perspective in art is the technique artists use to create the <strong>illusion of depth and three-dimensional space on a flat surface</strong>. One major type is linear perspective, which uses lines that converge at a vanishing point.</p>
+  </div>
+
+  <h4>Linear Perspective (Popular during the Renaissance)</h4>
+  <div class="grid grid-3">
+    <div class="card">
+      <h4>One-Point Perspective</h4>
+      <p>Creates illusion of depth using <strong>one vanishing point</strong> on the horizon line. All lines moving away from the viewer converge toward that single point.</p>
+    </div>
+    <div class="card">
+      <h4>Two-Point Perspective</h4>
+      <p>Uses <strong>two vanishing points</strong> on the horizon line. Viewer sees the object from an angle, usually showing the corner of a building or object.</p>
+    </div>
+    <div class="card">
+      <h4>Three-Point Perspective</h4>
+      <p>Uses <strong>three vanishing points</strong> — two on the horizon plus one above or below — for a more dramatic and realistic sense of depth.</p>
+    </div>
+  </div>
+
+  <h4>Other Perspective Techniques</h4>
+  <div class="grid grid-2">
+    <div class="card">
+      <h4>Atmospheric (Aerial) Perspective</h4>
+      <p>Creates depth using color and clarity rather than converging lines. Distant objects appear: <strong>Lighter, Bluer, and Less detailed</strong>.</p>
+    </div>
+    <div class="card">
+      <h4>Foreshortening</h4>
+      <p>Makes parts of the body or objects appear shorter or compressed to show depth. Creates the illusion that the object extends toward or away from the viewer.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- QUICK REFERENCE QUIZ SECTION -->
+<section>
+<div class="container">
+  <div class="section-label">Quick Reference</div>
+  <h2>Key Answer Keys & Quick Recall</h2>
+
+  <h3>Subject & Content Answer Key</h3>
+  <div class="answer-key">
+    <h4>Answer Key</h4>
+    <div class="answer-key-grid">
+      <span>1 — B (Subject)</span><span>2 — C (Objective art)</span><span>3 — C (Statue of a horse)</span>
+      <span>4 — B (Representational)</span><span>5 — D (Nonrepresentational)</span><span>6 — B (Meaning or message)</span>
+      <span>7 — C (Factual Meaning)</span><span>8 — B (Conventional Meaning)</span><span>9 — B (Conventional Meaning)</span>
+      <span>10 — A (Factual Meaning)</span>
+    </div>
+  </div>
+
+  <h3>Art Movements Answer Key</h3>
+  <div class="answer-key">
+    <h4>Multiple Choice</h4>
+    <div class="answer-key-grid">
+      <span>1 — B (Stone Age)</span><span>2 — C (Renaissance)</span><span>3 — B (Parthenon)</span>
+      <span>4 — C (Breaks from tradition)</span><span>5 — C (Expressionism)</span>
+    </div>
+    <h4 style="margin-top:12px;">True or False</h4>
+    <div class="answer-key-grid">
+      <span>6 — T</span><span>7 — T</span><span>8 — F</span><span>9 — T</span><span>10 — F</span>
+    </div>
+  </div>
+
+  <h3>Forms of Visual Art Answer Key</h3>
+  <div class="answer-key">
+    <div class="answer-key-grid">
+      <span>1 — C (Painting)</span><span>2 — A (Drawing)</span><span>3 — B (Sculpture)</span>
+      <span>4 — C (Printmaking)</span><span>5 — A (Photography)</span><span>6 — B (Architecture)</span>
+      <span>7 — C (Ceramics)</span><span>8 — A (Textile Arts)</span><span>9 — B (Mosaic)</span>
+      <span>10 — C (Mixed Media)</span>
+    </div>
+  </div>
+
+  <h3>Theater Arts Answer Key</h3>
+  <div class="answer-key">
+    <div class="answer-key-grid">
+      <span>1 — B</span><span>2 — C (Renaissance)</span><span>3 — C (Acting)</span>
+      <span>4 — C (Direct with audience)</span><span>5 — B (Thrust Stage)</span>
+      <span>6 — Proscenium Stage</span><span>7 — Thrust Stage</span>
+      <span>8 — Physical Theater</span><span>9 — Multimedia Theater</span><span>10 — Interactive Theater</span>
+    </div>
+  </div>
+
+  <h3>Literary Arts Answer Key</h3>
+  <div class="answer-key">
+    <div class="answer-key-grid">
+      <span>1 — B</span><span>2 — A (Theme)</span><span>3 — D (Narrative Poetry)</span>
+      <span>4 — C (Fiction & Non-Fiction)</span><span>5 — C (Moral lesson)</span>
+      <span>6 — C (Biography)</span><span>7 — D (Melodrama)</span><span>8 — C (Symbolism)</span>
+      <span>9 — B (Tragicomedy)</span><span>10 — C (Musical)</span>
+    </div>
+  </div>
+
+  <h3>Intro to Art Answer Key</h3>
+  <div class="answer-key">
+    <h4>Multiple Choice</h4>
+    <div class="answer-key-grid">
+      <span>1 — B</span><span>2 — C (Theoretical framework)</span><span>3 — C (Transform ideas)</span>
+      <span>4 — B (Cultural festival)</span><span>5 — C (Performing arts)</span>
+    </div>
+    <h4 style="margin-top:12px;">Identification</h4>
+    <div class="answer-key-grid">
+      <span>6 — Visual Art</span><span>7 — Historical Record</span><span>8 — Literary Arts</span>
+    </div>
+  </div>
+
+  <h3>Architecture Answer Key</h3>
+  <div class="answer-key">
+    <div class="answer-key-grid">
+      <span>1 — B</span><span>2 — C (Texture)</span><span>3 — B (Rhythm)</span>
+      <span>4 — A (Gothic)</span><span>5 — C</span>
+    </div>
+  </div>
+</div>
+</section>
+
+<footer>
+  GE 218 — Arts Appreciation &nbsp;·&nbsp; Comprehensive Reviewer &nbsp;·&nbsp; All Modules Compiled
+</footer>
+
+</body>
+</html>
